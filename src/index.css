@@ -1,6 +1,7 @@
 :root {
-  --color-light-grey: #f0f2f5;
-  --color-text-dark-grey: #111b21;
+  --color-primary-light: #f0f2f5;
+  --color-primary-text-dark: #111b21;
+  --conversation-panel-background: #efeae2;
 }
 
 body {

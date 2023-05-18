@@ -187,7 +187,18 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           </div>
         ))}
       </div>
-      <div className="messenger-screen__conversation-panel"></div>
+      <div className="messenger-screen__conversation-panel">
+        {activeChatIndex === null && (
+          <div className="messenger-screen__no-selected-chat-view">
+            <p className="messenger-screen__no-selected-chat-view-tiile">
+              WhatsApp + Green API
+            </p>
+          </div>
+        )}
+        {activeChatIndex !== null && (
+          <div className="messenger-screen__conversation-panel-content"></div>
+        )}
+      </div>
     </div>
   );
 }
