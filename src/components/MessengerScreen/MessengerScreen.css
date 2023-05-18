@@ -6,17 +6,17 @@
 .messenger-screen__chats-panel {
   flex: 0 0 45%;
   min-width: 45%;
-  border-right: 1px solid var(--color-primary-light);
+  border-right: 1px solid var(--color-border);
   overflow-y: auto;
 }
 
 .messenger-screen__chat-container {
-  font-size: 18px;
   width: 100%;
   height: 72px;
   display: flex;
   align-items: center;
-  color: var(--color-primary-text-dark);
+  font-size: 18px;
+  color: var(--color-primary-text);
   border-bottom: 1px solid var(--color-primary-light);
 }
 
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-primary-text-dark);
+  color: var(--color-primary-text);
   font-size: 32px;
 }
 
@@ -52,6 +52,56 @@
   background-image: url("/images/chat-background.png");
   background-color: var(--conversation-panel-background);
   background-repeat: repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+.messenger-screen__conversation-panel-header {
+  height: 59px;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-primary-light);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 18px;
+  color: var(--color-primary-text);
+  padding-left: 30px;
+}
+
+.messenger-screen__conversation-panel-messages {
+  flex-grow: 1;
+}
+
+.messenger-screen__conversation-panel-footer {
+  min-height: 62px;
+  background-color: var(--color-primary-light);
+  border-top: 1px solid var(--color-border);
+  padding: 20px 0 20px 60px;
+  display: flex;
+  align-items: center;
+  color: var(--color-secondary-text);
+}
+
+.messenger-screen__message-input {
+  width: 100%;
+  padding: 15px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--color-secondary-text);
+}
+
+.messenger-screen__send-message-button {
+  margin-left: 14px;
+  margin-right: 22px;
+  margin-top: 4px;
+}
+
+.messenger-screen__send-message-button_hidden {
+  visibility: hidden;
+}
+
+.messenger-screen__send-message-button:not(:disabled):hover {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {
