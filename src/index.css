@@ -1,3 +1,13 @@
+:root {
+  --color-light-grey: #f0f2f5;
+  --color-text-dark-grey: #111b21;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
