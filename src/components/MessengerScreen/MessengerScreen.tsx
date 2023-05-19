@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./MessengerScreen.css";
-import { IChat } from "../../types";
+import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
 import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
@@ -390,6 +390,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const prevScrollTop = useRef(0);
 
   const getChatName = (chat: IChat): string => {
     // TODO: format phone number
@@ -423,19 +425,12 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
         props.credentials
       );
 
-      setChats((prev) =>
-        prev.map((chat, i) =>
-          i === activeChatIndex
-            ? {
-                ...chat,
-                messages: [
-                  { from: props.user, to: receiver!, text: message },
-                  ...chat.messages,
-                ],
-              }
-            : chat
-        )
-      );
+      addMessage(activeChatIndex, {
+        from: props.user,
+        to: receiver!,
+        text: message,
+      });
+
       setMessage("");
     } catch (e) {
       // TODO: show notification
@@ -454,6 +449,28 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     }
   };
 
+  const isScrolledToBottom = (): boolean => {
+    if (!messagesContainerRef.current) {
+      return false;
+    }
+
+    return Math.abs(messagesContainerRef.current.scrollTop) <= 3;
+  };
+
+  const addMessage = useCallback((chatIdx: number, message: IMessage): void => {
+    prevScrollTop.current = messagesContainerRef.current?.scrollTop || 0;
+    setChats((prev) =>
+      prev.map((chat, i) =>
+        i === chatIdx
+          ? {
+              ...chat,
+              messages: [message, ...chat.messages],
+            }
+          : chat
+      )
+    );
+  }, []);
+
   useEffect(() => {
     if (activeChatIndex === null) {
       return;
@@ -463,32 +480,30 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
 
     messageInputRef.current?.focus();
     setMessage("");
+  }, [activeChatIndex, addMessage]);
 
-    // TODO: remove
-    setTimeout(() => {
-      setChats((prev) =>
-        prev.map((_, i) =>
-          i === 0
-            ? {
-                ..._,
-                messages: [
-                  {
-                    from: {
-                      phone: "79494533036",
-                    },
-                    to: {
-                      phone: "",
-                    },
-                    text: "peasant",
-                  },
-                  ..._.messages,
-                ],
-              }
-            : _
-        )
-      );
-    }, 3000);
-  }, [activeChatIndex]);
+  useEffect(() => {
+    if (
+      !messagesContainerRef.current ||
+      activeChatIndex === null ||
+      !chats[activeChatIndex].messages.length
+    ) {
+      return;
+    }
+
+    if (
+      isScrolledToBottom() ||
+      chats[activeChatIndex].messages[0].from.phone === props.user.phone
+    ) {
+      messagesContainerRef.current.scrollTop = 0;
+    } else {
+      const offset =
+        (
+          messagesContainerRef.current.firstChild as HTMLElement
+        )?.getBoundingClientRect().height || 0;
+      messagesContainerRef.current.scrollTop = prevScrollTop.current - offset;
+    }
+  }, [activeChatIndex, chats, props.user.phone]);
 
   // TODO: extract some components (ConversationPanel, ...)
   return (
@@ -521,7 +536,10 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             <div className="messenger-screen__conversation-panel-header">
               {getChatName(chats[activeChatIndex])}
             </div>
-            <div className="messenger-screen__conversation-panel-messages">
+            <div
+              className="messenger-screen__conversation-panel-messages"
+              ref={messagesContainerRef}
+            >
               {chats[activeChatIndex].messages.map((message, i) => (
                 <div
                   className={`messenger-screen__message-container ${
