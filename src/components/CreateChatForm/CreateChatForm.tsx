@@ -39,6 +39,9 @@ export default function CreateChatForm(props: ICreateChatPanelProps) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+          <div className="create-chat-form__button-form__container">
+            <button className="button-regular">Create chat</button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,5 +1,6 @@
 :root {
-  --primary-light: #f0f2f5;
+  --primary: #f0f2f5;
+  --secondary: #008069;
   --primary-text: #111b21;
   --secondary-text: #3b4a54;
   --tertiary-text: #fff;
@@ -7,7 +8,6 @@
   --message-from-me-bg: #d9fdd3;
   --message-from-friend-bg: #fff;
   --conversation-panel-background: #efeae2;
-  --create-chat-form-bgc: #008069;
   --shadow-rgb: 11, 20, 26;
 }
 
@@ -20,6 +20,7 @@ button {
   border: none;
   color: inherit;
   background: none;
+  font-size: inherit;
 }
 
 button:not(:disabled):hover {
