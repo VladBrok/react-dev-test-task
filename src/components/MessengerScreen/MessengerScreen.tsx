@@ -13,6 +13,7 @@ import {
   startReceivingNotifications,
   stopReceivingNotifications,
 } from "../../lib/notifications";
+import NewChatIcon from "../Icons/NewChatIcon";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -383,17 +384,6 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
         },
       ],
     },
-    {
-      messages: [],
-      users: [
-        {
-          phone: "",
-        },
-        {
-          phone: "79493933403",
-        },
-      ],
-    },
   ]);
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
@@ -480,6 +470,10 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     );
   }, []);
 
+  const handleCreateNewChatClick = (): void => {
+    console.log("creating a new chat.");
+  };
+
   useEffect(() => {
     if (activeChatIndex === null) {
       return;
@@ -543,10 +537,15 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     return () => stopReceivingNotifications(abortController);
   }, [handleIncomingMessage, props.credentials]);
 
-  // TODO: extract some components (ConversationPanel, ...)
+  // TODO: extract some components (ConversationPanel, ChatsPanel ...)
   return (
     <div className="messenger-screen__container">
       <div className="messenger-screen__chats-panel">
+        <div className="messenger-screen__chats-panel-menu">
+          <button title="New Chat" onClick={handleCreateNewChatClick}>
+            <NewChatIcon />
+          </button>
+        </div>
         {chats.map((chat, i) => (
           <Chat
             name={getChatName(chat)}

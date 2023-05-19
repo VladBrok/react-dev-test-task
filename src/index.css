@@ -17,6 +17,11 @@ body {
 button {
   border: none;
   color: inherit;
+  background: none;
+}
+
+button:not(:disabled):hover {
+  cursor: pointer;
 }
 
 button:disabled {

@@ -10,6 +10,17 @@
   overflow-y: auto;
 }
 
+.messenger-screen__chats-panel-menu {
+  color: var(--secondary-text);
+  border-bottom: 1px solid var(--border);
+  height: 55px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: var(--primary-light);
+}
+
 .messenger-screen__conversation-panel {
   flex-grow: 1;
 }
@@ -79,10 +90,6 @@
 
 .messenger-screen__send-message-button_hidden {
   visibility: hidden;
-}
-
-.messenger-screen__send-message-button:not(:disabled):hover {
-  cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {
