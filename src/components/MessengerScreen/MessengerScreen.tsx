@@ -518,6 +518,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             name={getChatName(chat)}
             isActive={i === activeChatIndex}
             onClick={() => setActiveChatIndex(i)}
+            key={i}
           />
         ))}
       </div>
