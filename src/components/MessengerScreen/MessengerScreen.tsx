@@ -7,6 +7,7 @@ import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessa
 import SendMessageIcon from "../Icons/SendMessageIcon";
 import Message from "../Message/Message";
 import Chat from "../Chat/Chat";
+import { formatPhoneNumber } from "../../lib/formatPhoneNumber";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -384,7 +385,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           phone: "",
         },
         {
-          phone: "79493933400",
+          phone: "79493933403",
         },
       ],
     },
@@ -397,11 +398,11 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   const prevScrollTop = useRef(0);
 
   const getChatName = (chat: IChat): string => {
-    // TODO: format phone number
     // TODO: dup with "handleSendMessageClick"
     return (
-      chat.users.find((user) => user.phone !== props.user.phone)?.phone ||
-      "(You)"
+      formatPhoneNumber(
+        chat.users.find((user) => user.phone !== props.user.phone)?.phone || ""
+      ) || "(You)"
     );
   };
 
