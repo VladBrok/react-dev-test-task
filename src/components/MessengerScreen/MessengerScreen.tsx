@@ -514,9 +514,25 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     }
   }, [activeChatIndex, chats, props.user.phone]);
 
-  const handleIncomingMessage = (message: IMessage): void => {
-    console.log("got a message:", message);
-  };
+  const handleIncomingMessage = useCallback(
+    (message: IMessage): void => {
+      const targetChats = chats.filter((chat) =>
+        // TODO: dup
+        chat.users.find((user) => user.phone === message.from.phone)
+      );
+
+      assert(targetChats.length === 1 || targetChats.length === 0);
+
+      if (!targetChats.length) {
+        return;
+      }
+
+      const chatIdx = chats.findIndex((chat) => chat === targetChats[0]);
+      assert(chatIdx > -1);
+      addMessage(chatIdx, message);
+    },
+    [addMessage, chats]
+  );
 
   useEffect(() => {
     const abortController = startReceivingNotifications(
@@ -525,7 +541,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     );
 
     return () => stopReceivingNotifications(abortController);
-  }, [props.credentials]);
+  }, [handleIncomingMessage, props.credentials]);
 
   // TODO: extract some components (ConversationPanel, ...)
   return (

@@ -7,6 +7,8 @@ import { extractPhoneFromChatId } from "./extractPhoneFromChatId";
 
 const PAUSE_BETWEEN_REQUESTS_IN_MILLISECONDS = 5000;
 
+// TODO: add callback onError
+
 export function startReceivingNotifications(
   credentials: ICredentials,
   onIncomingMessage: (message: IMessage) => void
