@@ -16,6 +16,10 @@ button {
   color: inherit;
 }
 
+button:disabled {
+  opacity: 0.4;
+}
+
 * {
   margin: 0;
   padding: 0;
