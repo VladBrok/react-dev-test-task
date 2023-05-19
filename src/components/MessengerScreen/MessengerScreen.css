@@ -72,16 +72,6 @@
   color: var(--secondary-text);
 }
 
-.messenger-screen__message-input {
-  width: 100%;
-  padding: 15px;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  color: var(--secondary-text);
-  resize: none;
-}
-
 .messenger-screen__send-message-button {
   margin-left: 14px;
   margin-right: 22px;

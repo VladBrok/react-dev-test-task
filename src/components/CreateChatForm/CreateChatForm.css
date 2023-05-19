@@ -1,0 +1,23 @@
+.create-chat-form__container {
+  height: 100%;
+  background-color: var(--primary-light);
+}
+
+.create-chat-form__header {
+  font-size: 20px;
+  color: var(--tertiary-text);
+  background-color: var(--create-chat-form-bgc);
+  height: 120px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.create-chat-form__back-button {
+  margin-bottom: -4px;
+}
+
+.create-chat-form__content {
+  padding: 30px 20px;
+}

@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import "./MessengerScreen.css";
+import "../../sharedStyles.css";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
@@ -14,6 +15,7 @@ import {
   stopReceivingNotifications,
 } from "../../lib/notifications";
 import NewChatIcon from "../Icons/NewChatIcon";
+import CreateChatForm from "../CreateChatForm/CreateChatForm";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -388,6 +390,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isCreateChatFormOpen, setIsCreateChatFormOpen] = useState(false);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const prevScrollTop = useRef(0);
@@ -470,8 +473,22 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     );
   }, []);
 
-  const handleCreateNewChatClick = (): void => {
-    console.log("creating a new chat.");
+  const addChat = (phone: string): void => {
+    setChats((prev) => [
+      ...prev,
+      {
+        messages: [],
+        users: [
+          {
+            phone,
+          },
+          {
+            phone: "",
+          },
+        ],
+      },
+    ]);
+    setIsCreateChatFormOpen(false);
   };
 
   useEffect(() => {
@@ -541,19 +558,31 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   return (
     <div className="messenger-screen__container">
       <div className="messenger-screen__chats-panel">
-        <div className="messenger-screen__chats-panel-menu">
-          <button title="New Chat" onClick={handleCreateNewChatClick}>
-            <NewChatIcon />
-          </button>
-        </div>
-        {chats.map((chat, i) => (
-          <Chat
-            name={getChatName(chat)}
-            isActive={i === activeChatIndex}
-            onClick={() => setActiveChatIndex(i)}
-            key={i}
+        {isCreateChatFormOpen ? (
+          <CreateChatForm
+            onCancel={() => setIsCreateChatFormOpen(false)}
+            onCreate={addChat}
           />
-        ))}
+        ) : (
+          <>
+            <div className="messenger-screen__chats-panel-menu">
+              <button
+                title="New Chat"
+                onClick={() => setIsCreateChatFormOpen(true)}
+              >
+                <NewChatIcon />
+              </button>
+            </div>
+            {chats.map((chat, i) => (
+              <Chat
+                name={getChatName(chat)}
+                isActive={i === activeChatIndex}
+                onClick={() => setActiveChatIndex(i)}
+                key={i}
+              />
+            ))}
+          </>
+        )}
       </div>
       <div className="messenger-screen__conversation-panel">
         {activeChatIndex === null && (
@@ -580,7 +609,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
               {/* TODO: increase rows value dynamically as user types (?)*/}
               <textarea
                 ref={messageInputRef}
-                className="messenger-screen__message-input"
+                className="input-field"
                 rows={1}
                 placeholder="Enter a message..."
                 value={message}
