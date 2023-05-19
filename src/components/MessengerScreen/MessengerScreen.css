@@ -10,29 +10,6 @@
   overflow-y: auto;
 }
 
-.messenger-screen__chat-container {
-  width: 100%;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  color: var(--primary-text);
-  border-bottom: 1px solid var(--primary-light);
-}
-
-.messenger-screen__chat-container:hover {
-  background-color: var(--primary-light);
-  cursor: pointer;
-}
-
-.messenger-screen__chat-container_active {
-  background-color: var(--primary-light);
-}
-
-.messenger-screen__chat-name {
-  margin-left: 30px;
-}
-
 .messenger-screen__conversation-panel {
   flex-grow: 1;
 }

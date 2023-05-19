@@ -6,6 +6,7 @@ import { assert } from "../../lib/assert";
 import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
 import SendMessageIcon from "../Icons/SendMessageIcon";
 import Message from "../Message/Message";
+import Chat from "../Chat/Chat";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -512,17 +513,11 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     <div className="messenger-screen__container">
       <div className="messenger-screen__chats-panel">
         {chats.map((chat, i) => (
-          <div
-            className={`messenger-screen__chat-container ${
-              i === activeChatIndex
-                ? "messenger-screen__chat-container_active"
-                : ""
-            }`}
-            key={i}
+          <Chat
+            name={getChatName(chat)}
+            isActive={i === activeChatIndex}
             onClick={() => setActiveChatIndex(i)}
-          >
-            <p className="messenger-screen__chat-name">{getChatName(chat)}</p>
-          </div>
+          />
         ))}
       </div>
       <div className="messenger-screen__conversation-panel">
