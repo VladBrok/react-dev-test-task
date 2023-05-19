@@ -4,7 +4,8 @@ import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
 import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
-import SendMessageIcon from "../icons/SendMessageIcon";
+import SendMessageIcon from "../Icons/SendMessageIcon";
+import Message from "../Message/Message";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -542,24 +543,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
               ref={messagesContainerRef}
             >
               {chats[activeChatIndex].messages.map((message, i) => (
-                <div
-                  className={`messenger-screen__message-container ${
-                    message.from.phone === props.user.phone
-                      ? "messenger-screen__message-container_from-me"
-                      : "messenger-screen__message-container_from-friend"
-                  }`}
-                  key={i}
-                >
-                  <div
-                    className={`messenger-screen__message ${
-                      message.from.phone === props.user.phone
-                        ? "messenger-screen__message_from-me"
-                        : "messenger-screen__message_from-friend"
-                    }`}
-                  >
-                    {message.text}
-                  </div>
-                </div>
+                <Message user={props.user} message={message} key={i} />
               ))}
             </div>
             <div className="messenger-screen__conversation-panel-footer">
