@@ -21,6 +21,11 @@ class InfrastructureClient {
     const response = await axiosInstance.post<T>(url, data, config);
     return response;
   }
+
+  async delete<T>(url: string, config?: AxiosRequestConfig) {
+    const response = await axiosInstance.delete<T>(url, config);
+    return response;
+  }
 }
 
 export const Client = new InfrastructureClient();
