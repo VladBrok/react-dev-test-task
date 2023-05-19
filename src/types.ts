@@ -12,3 +12,8 @@ export interface IChat {
   users: IUser[];
   messages: IMessage[];
 }
+
+export interface ICredentials {
+  idInstance: string;
+  apiTokenInstance: string;
+}

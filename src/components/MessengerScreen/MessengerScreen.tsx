@@ -3,6 +3,7 @@ import "./MessengerScreen.css";
 import { IChat } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
+import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -13,15 +14,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           phone: "",
         },
         {
-          phone: "79493933400",
-        },
-      ],
-    },
-    {
-      messages: [],
-      users: [
-        {
-          phone: "",
+          phone: "79494533036",
         },
       ],
     },
@@ -160,23 +153,63 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   ]);
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const getChatName = (chat: IChat): string => {
     // TODO: format phone number
+    // TODO: dup with "handleSendMessageClick"
     return (
       chat.users.find((user) => user.phone !== props.user.phone)?.phone ||
       "(You)"
     );
   };
 
-  const sendMessage = (): void => {
+  const handleSendMessageClick = async (): Promise<void> => {
     assert(message != "");
+    assert(activeChatIndex != null);
 
-    console.log("sending message:", message);
+    if (activeChatIndex == null) {
+      return;
+    }
 
-    setMessage("");
-    messageInputRef.current?.focus();
+    try {
+      setIsSending(true);
+
+      const receiver = chats[activeChatIndex].users.find(
+        (user) => user.phone !== props.user.phone
+      );
+
+      await sendMessage(
+        {
+          chatId: `${receiver?.phone}@c.us`,
+          message,
+        },
+        props.credentials
+      );
+
+      setChats((prev) =>
+        prev.map((chat, i) =>
+          i === activeChatIndex
+            ? {
+                ...chat,
+                messages: [
+                  ...chat.messages,
+                  { from: props.user, to: receiver!, text: message },
+                ],
+              }
+            : chat
+        )
+      );
+      setMessage("");
+    } catch (e) {
+      // TODO: show notification
+      console.error("Failed to send a message. Please try again later", e);
+    } finally {
+      setIsSending(false);
+      assert(messageInputRef.current != null);
+      messageInputRef.current?.focus();
+    }
   };
 
   useEffect(() => {
@@ -236,7 +269,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
                 className={`messenger-screen__send-message-button ${
                   message ? "" : "messenger-screen__send-message-button_hidden"
                 }`}
-                onClick={sendMessage}
+                disabled={isSending}
+                onClick={handleSendMessageClick}
               >
                 <svg
                   viewBox="0 0 24 24"
