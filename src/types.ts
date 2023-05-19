@@ -17,3 +17,7 @@ export interface ICredentials {
   idInstance: string;
   apiTokenInstance: string;
 }
+
+export interface IAbortController {
+  abort: boolean;
+}

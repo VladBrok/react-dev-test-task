@@ -9,6 +9,10 @@ import Message from "../Message/Message";
 import Chat from "../Chat/Chat";
 import { formatPhoneNumber } from "../../lib/formatPhoneNumber";
 import toast, { Toaster } from "react-hot-toast";
+import {
+  startReceivingNotifications,
+  stopReceivingNotifications,
+} from "../../lib/notifications";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -509,6 +513,19 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
       messagesContainerRef.current.scrollTop = prevScrollTop.current - offset;
     }
   }, [activeChatIndex, chats, props.user.phone]);
+
+  const handleIncomingMessage = (message: IMessage): void => {
+    console.log("got a message:", message);
+  };
+
+  useEffect(() => {
+    const abortController = startReceivingNotifications(
+      props.credentials,
+      handleIncomingMessage
+    );
+
+    return () => stopReceivingNotifications(abortController);
+  }, [props.credentials]);
 
   // TODO: extract some components (ConversationPanel, ...)
   return (
