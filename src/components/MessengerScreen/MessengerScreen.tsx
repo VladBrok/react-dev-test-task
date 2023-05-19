@@ -261,6 +261,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
                 ref={messageInputRef}
                 className="messenger-screen__message-input"
                 rows={1}
+                placeholder="Enter a message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               ></textarea>
