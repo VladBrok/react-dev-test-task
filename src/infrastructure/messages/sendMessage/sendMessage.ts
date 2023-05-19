@@ -5,8 +5,11 @@ import { ISendMessageRequest, ISendMessageResponse } from "./sendMessage.types";
 export async function sendMessage(
   body: ISendMessageRequest,
   credentials: ICredentials
-): Promise<ISendMessageResponse> {
-  const response = await Client.post<ISendMessageRequest, ISendMessageResponse>(
+): Promise<ISendMessageResponse | undefined> {
+  const response = await Client.post<
+    ISendMessageRequest,
+    ISendMessageResponse | undefined
+  >(
     `/waInstance${credentials.idInstance}/sendMessage/${credentials.apiTokenInstance}`,
     body
   );
