@@ -548,7 +548,11 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   useEffect(() => {
     const abortController = startReceivingNotifications(
       props.credentials,
-      handleIncomingMessage
+      handleIncomingMessage,
+      (error: unknown) => {
+        console.error(error);
+        toast.error("Failed to receive messages");
+      }
     );
 
     return () => stopReceivingNotifications(abortController);
@@ -629,8 +633,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             </div>
           </div>
         )}
-        <Toaster />
       </div>
+      <Toaster />
     </div>
   );
 }
