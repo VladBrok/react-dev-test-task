@@ -1,9 +1,12 @@
 :root {
-  --color-primary-light: #f0f2f5;
-  --color-primary-text: #111b21;
-  --color-secondary-text: #3b4a54;
-  --color-border: #d1d7db;
+  --primary-light: #f0f2f5;
+  --primary-text: #111b21;
+  --secondary-text: #3b4a54;
+  --border: #d1d7db;
+  --message-from-me-bg: #d9fdd3;
+  --message-from-friend-bg: #fff;
   --conversation-panel-background: #efeae2;
+  --shadow-rgb: 11, 20, 26;
 }
 
 body {
@@ -24,4 +27,5 @@ button:disabled {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-wrap: anywhere;
 }

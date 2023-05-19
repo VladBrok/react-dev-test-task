@@ -8,7 +8,242 @@ import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessa
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
     {
-      messages: [],
+      messages: [
+        {
+          from: {
+            phone: "",
+          },
+          to: {
+            phone: "79494533036",
+          },
+          text: "omg",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "no way",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "sdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdfjl;sajfwjeoifjjvjsfsdfjslkdf",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, accusantium vitae beatae tempora maiores dolores dicta quibusdam. Tempora quasi fugiat eaque. Tempore architecto amet maiores. Quibusdam ducimus magni, id veniam eos suscipit, culpa beatae vel non aperiam accusantium, voluptas fuga impedit totam debitis nemo minus? Esse quasi porro iure animi molestias id perspiciatis. Aperiam veritatis expedita odit excepturi voluptatibus facere delectus reiciendis blanditiis laudantium sint totam omnis ab consequatur natus sapiente repellendus, suscipit explicabo dolore id aliquam et magni quod? Dicta eveniet ut, tempore impedit assumenda cumque maxime minus rerum libero incidunt blanditiis sint ex non rem nesciunt sunt est.",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+        {
+          from: {
+            phone: "79494533036",
+          },
+          to: {
+            phone: "",
+          },
+          text: "peasant",
+        },
+      ],
       users: [
         {
           phone: "",
@@ -194,8 +429,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             ? {
                 ...chat,
                 messages: [
-                  ...chat.messages,
                   { from: props.user, to: receiver!, text: message },
+                  ...chat.messages,
                 ],
               }
             : chat
@@ -212,6 +447,13 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessageClick();
+    }
+  };
+
   useEffect(() => {
     if (activeChatIndex === null) {
       return;
@@ -221,6 +463,31 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
 
     messageInputRef.current?.focus();
     setMessage("");
+
+    // TODO: remove
+    setTimeout(() => {
+      setChats((prev) =>
+        prev.map((_, i) =>
+          i === 0
+            ? {
+                ..._,
+                messages: [
+                  {
+                    from: {
+                      phone: "79494533036",
+                    },
+                    to: {
+                      phone: "",
+                    },
+                    text: "peasant",
+                  },
+                  ..._.messages,
+                ],
+              }
+            : _
+        )
+      );
+    }, 3000);
   }, [activeChatIndex]);
 
   // TODO: extract some components (ConversationPanel, ...)
@@ -254,7 +521,28 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             <div className="messenger-screen__conversation-panel-header">
               {getChatName(chats[activeChatIndex])}
             </div>
-            <div className="messenger-screen__conversation-panel-messages"></div>
+            <div className="messenger-screen__conversation-panel-messages">
+              {chats[activeChatIndex].messages.map((message, i) => (
+                <div
+                  className={`messenger-screen__message-container ${
+                    message.from.phone === props.user.phone
+                      ? "messenger-screen__message-container_from-me"
+                      : "messenger-screen__message-container_from-friend"
+                  }`}
+                  key={i}
+                >
+                  <div
+                    className={`messenger-screen__message ${
+                      message.from.phone === props.user.phone
+                        ? "messenger-screen__message_from-me"
+                        : "messenger-screen__message_from-friend"
+                    }`}
+                  >
+                    {message.text}
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="messenger-screen__conversation-panel-footer">
               {/* TODO: increase rows value dynamically as user types (?)*/}
               <textarea
@@ -263,6 +551,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
                 rows={1}
                 placeholder="Enter a message..."
                 value={message}
+                onKeyDown={handleKeyDown}
                 onChange={(e) => setMessage(e.target.value)}
               ></textarea>
 
