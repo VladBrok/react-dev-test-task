@@ -8,6 +8,7 @@ import SendMessageIcon from "../Icons/SendMessageIcon";
 import Message from "../Message/Message";
 import Chat from "../Chat/Chat";
 import { formatPhoneNumber } from "../../lib/formatPhoneNumber";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -417,6 +418,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     try {
       setIsSending(true);
 
+      throw new Error();
+
       const receiver = chats[activeChatIndex].users.find(
         (user) => user.phone !== props.user.phone
       );
@@ -437,8 +440,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
 
       setMessage("");
     } catch (e) {
-      // TODO: show notification
-      console.error("Failed to send a message. Please try again later", e);
+      console.error(e);
+      toast.error("Failed to send a message. Please try again later");
     } finally {
       setIsSending(false);
       assert(messageInputRef.current != null);
@@ -567,6 +570,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
             </div>
           </div>
         )}
+        <Toaster />
       </div>
     </div>
   );
