@@ -418,8 +418,6 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     try {
       setIsSending(true);
 
-      throw new Error();
-
       const receiver = chats[activeChatIndex].users.find(
         (user) => user.phone !== props.user.phone
       );
