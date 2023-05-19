@@ -57,14 +57,13 @@
 }
 
 .messenger-screen__conversation-panel-header {
-  height: 69px;
   display: flex;
   align-items: center;
   background-color: var(--primary-light);
   border-bottom: 1px solid var(--border);
   font-size: 18px;
   color: var(--primary-text);
-  padding-left: 30px;
+  padding: 18px 0 18px 30px;
 }
 
 .messenger-screen__conversation-panel-messages {
