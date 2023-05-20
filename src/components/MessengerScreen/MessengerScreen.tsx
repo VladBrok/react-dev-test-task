@@ -43,7 +43,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
 
       addMessage(activeChatIndex, {
         from: props.user,
-        to: receiver!,
+        to: receiver!, // TODO: fix
         text: message,
       });
     } catch (e) {
