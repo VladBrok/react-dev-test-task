@@ -5,6 +5,7 @@ import { ICredentials } from "./types";
 import AuthScreen from "./components/AuthScreen/AuthScreen";
 
 export default function App() {
+  // TODO: remove env variables
   const [credentials, setCredentials] = useState<ICredentials>({
     idInstance: import.meta.env.VITE_ID_INSTANCE,
     apiTokenInstance: import.meta.env.VITE_API_TOKEN_INSTANCE,
