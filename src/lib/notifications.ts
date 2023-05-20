@@ -4,6 +4,7 @@ import { receiveNotification } from "../infrastructure/notifications/receiveNoti
 import { IReceiveNotificationResponse } from "../infrastructure/notifications/receiveNotification/receiveNotification.types";
 import { IAbortController, ICredentials, IMessage, IUser } from "../types";
 import { extractPhoneFromChatId } from "./extractPhoneFromChatId";
+import { v4 as uuidv4 } from "uuid";
 
 const PAUSE_BETWEEN_REQUESTS_IN_MILLISECONDS = 5000;
 
@@ -61,6 +62,7 @@ async function processNotifications(
 
       if (chatId) {
         onIncomingMessage({
+          id: uuidv4(),
           from: {
             phone: extractPhoneFromChatId(chatId),
           },
