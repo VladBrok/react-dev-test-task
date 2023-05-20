@@ -61,7 +61,7 @@ export default function CreateChatForm(props: ICreateChatPanelProps) {
             autoFocus
             className="input-field"
             type="text"
-            placeholder="Enter a phone number..."
+            placeholder="Enter a phone number... (example: 79491234567)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />

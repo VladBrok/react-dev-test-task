@@ -5,16 +5,14 @@ import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
 import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
-import Chat from "../Chat/Chat";
-import { formatPhoneNumber } from "../../lib/formatPhoneNumber";
 import toast, { Toaster } from "react-hot-toast";
 import {
   startReceivingNotifications,
   stopReceivingNotifications,
 } from "../../lib/notifications";
-import NewChatIcon from "../Icons/NewChatIcon";
-import CreateChatForm from "../CreateChatForm/CreateChatForm";
 import ConversationPanel from "../ConversationPanel/ConversationPanel";
+import { getChatName } from "../../lib/getChatName";
+import ChatsPanel from "../ChatsPanel/ChatsPanel";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -388,16 +386,6 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   ]);
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
   const [isSending, setIsSending] = useState(false);
-  const [isCreateChatFormOpen, setIsCreateChatFormOpen] = useState(false);
-
-  const getChatName = (chat: IChat): string => {
-    // TODO: dup with "handleSendMessageClick"
-    return (
-      formatPhoneNumber(
-        chat.users.find((user) => user.phone !== props.user.phone)?.phone || ""
-      ) || "(You)"
-    );
-  };
 
   const handleSendMessage = async (message: string): Promise<void> => {
     assert(activeChatIndex != null);
@@ -462,13 +450,11 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
         ],
       },
     ]);
-    setIsCreateChatFormOpen(false);
   };
 
   const handleIncomingMessage = useCallback(
     (message: IMessage): void => {
       const targetChats = chats.filter((chat) =>
-        // TODO: dup
         chat.users.find((user) => user.phone === message.from.phone)
       );
 
@@ -498,37 +484,15 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     return () => stopReceivingNotifications(abortController);
   }, [handleIncomingMessage, props.credentials]);
 
-  // TODO: extract some components (ConversationPanel, ChatsPanel ...)
   return (
     <div className="messenger-screen__container">
-      <div className="messenger-screen__chats-panel">
-        {isCreateChatFormOpen ? (
-          <CreateChatForm
-            onCancel={() => setIsCreateChatFormOpen(false)}
-            onCreate={addChat}
-            chats={chats}
-          />
-        ) : (
-          <>
-            <div className="messenger-screen__chats-panel-menu">
-              <button
-                title="New Chat"
-                onClick={() => setIsCreateChatFormOpen(true)}
-              >
-                <NewChatIcon />
-              </button>
-            </div>
-            {chats.map((chat, i) => (
-              <Chat
-                name={getChatName(chat)}
-                isActive={i === activeChatIndex}
-                onClick={() => setActiveChatIndex(i)}
-                key={i}
-              />
-            ))}
-          </>
-        )}
-      </div>
+      <ChatsPanel
+        chats={chats}
+        activeChatIndex={activeChatIndex}
+        user={props.user}
+        onCreateChat={addChat}
+        onChatClick={(_, i) => setActiveChatIndex(i)}
+      />
       <ConversationPanel
         user={props.user}
         onSendMessage={handleSendMessage}
@@ -536,7 +500,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
         chat={activeChatIndex != null ? chats[activeChatIndex] : undefined}
         name={
           activeChatIndex != null
-            ? getChatName(chats[activeChatIndex])
+            ? getChatName(chats[activeChatIndex], props.user)
             : undefined
         }
       />

@@ -2,35 +2,3 @@
   display: flex;
   height: 100vh;
 }
-
-.messenger-screen__chats-panel {
-  flex: 0 0 45%;
-  min-width: 45%;
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-}
-
-.messenger-screen__chats-panel-menu {
-  color: var(--secondary-text);
-  border-bottom: 1px solid var(--border);
-  height: 55px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: var(--primary);
-}
-
-@media screen and (min-width: 1024px) {
-  .messenger-screen__chats-panel {
-    flex: 0 0 40%;
-    min-width: 40%;
-  }
-}
-
-@media screen and (min-width: 1300px) {
-  .messenger-screen__chats-panel {
-    flex: 0 0 30%;
-    min-width: 30%;
-  }
-}

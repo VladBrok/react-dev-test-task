@@ -61,6 +61,10 @@ export default function ConversationPanel(props: IConversationPanelProps) {
     }
   }, [props.chat?.messages, props.user.phone]);
 
+  useEffect(() => {
+    messageInputRef.current?.focus();
+  }, [props.chat]);
+
   return (
     <div className="conversation-panel__container">
       {props.chat == null ? (
