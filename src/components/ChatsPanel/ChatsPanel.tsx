@@ -32,14 +32,28 @@ export default function ChatsPanel(props: IChatsPanelProps) {
               <NewChatIcon />
             </button>
           </div>
-          {props.chats.map((chat, i) => (
-            <Chat
-              name={getChatName(chat, props.user)}
-              isActive={i === props.activeChatIndex}
-              onClick={() => props.onChatClick(chat, i)}
-              key={i}
-            />
-          ))}
+          {!props.chats.length && (
+            <div className="chats-panel__empty">
+              <p>No chats</p>
+              <p>
+                Click on the "
+                <span className="chats-panel__new-chat-icon">
+                  <NewChatIcon />
+                </span>
+                " icon at the top to create a chat
+              </p>
+            </div>
+          )}
+          <div className="chats-panel__chats">
+            {props.chats.map((chat, i) => (
+              <Chat
+                name={getChatName(chat, props.user)}
+                isActive={i === props.activeChatIndex}
+                onClick={() => props.onChatClick(chat, i)}
+                key={i}
+              />
+            ))}
+          </div>
         </>
       )}
     </div>

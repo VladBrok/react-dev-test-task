@@ -3,6 +3,8 @@
   min-width: 45%;
   border-right: 1px solid var(--border);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .chats-panel__menu {
@@ -14,6 +16,20 @@
   align-items: center;
   justify-content: flex-end;
   background-color: var(--primary);
+}
+
+.chats-panel__empty {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-text);
+}
+
+.chats-panel__new-chat-icon {
+  position: relative;
+  top: 5px;
 }
 
 @media screen and (min-width: 1024px) {
