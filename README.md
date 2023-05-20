@@ -61,3 +61,21 @@ npm i
 ```sh
 npm run dev
 ```
+
+### Экранные формы
+
+1. Экран авторизации
+
+![auth screen demo](public/demo/auth-screen.png)
+
+2. Главный экран
+
+![main screen demo](public/demo/main-screen.png)
+
+3. Создание чата
+
+![chat creation screen demo](public/demo/chat-creation.png)
+
+4. Просмотр чатов и сообщений
+
+![chats and messages view demo](public/demo/chats-and-messages.png)
