@@ -1,10 +1,11 @@
 import "./ConversationPanel.css";
 import "../../sharedStyles.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, useEffect, useMemo, useRef, useState } from "react";
 import SendMessageIcon from "../Icons/SendMessageIcon";
-import Message from "../Message/Message";
 import { IConversationPanelProps } from "./ConversationPanel.types";
 import { assert } from "../../lib/assert";
+
+const Message = lazy(() => import("../Message/Message"));
 
 export default function ConversationPanel(props: IConversationPanelProps) {
   const [message, setMessage] = useState("");

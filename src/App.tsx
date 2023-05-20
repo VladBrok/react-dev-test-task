@@ -1,8 +1,12 @@
-import { useState } from "react";
 import "./App.css";
-import MessengerScreen from "./components/MessengerScreen/MessengerScreen";
+import { Suspense, useState } from "react";
 import { ICredentials } from "./types";
-import AuthScreen from "./components/AuthScreen/AuthScreen";
+import { lazy } from "react";
+
+const MessengerScreen = lazy(
+  () => import("./components/MessengerScreen/MessengerScreen")
+);
+const AuthScreen = lazy(() => import("./components/AuthScreen/AuthScreen"));
 
 export default function App() {
   // TODO: remove env variables
@@ -15,18 +19,22 @@ export default function App() {
   return (
     <div className="app__container">
       {isAuthenticated ? (
-        <MessengerScreen
-          credentials={credentials}
-          user={{
-            phone: "",
-          }}
-        />
+        <Suspense>
+          <MessengerScreen
+            credentials={credentials}
+            user={{
+              phone: "",
+            }}
+          />
+        </Suspense>
       ) : (
-        <AuthScreen
-          credentials={credentials}
-          setCredentials={setCredentials}
-          onAuthenticated={() => setIsAuthenticated(true)}
-        />
+        <Suspense>
+          <AuthScreen
+            credentials={credentials}
+            setCredentials={setCredentials}
+            onAuthenticated={() => setIsAuthenticated(true)}
+          />
+        </Suspense>
       )}
     </div>
   );
