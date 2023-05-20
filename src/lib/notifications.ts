@@ -99,9 +99,6 @@ async function dequeueNotification(
       return;
     }
 
-    // TODO: remove
-    console.log("receive", notification);
-
     if (notification?.receiptId != null) {
       await deleteNotification(notification.receiptId, credentials);
     }
