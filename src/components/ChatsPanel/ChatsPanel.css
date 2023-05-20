@@ -25,6 +25,7 @@
   align-items: center;
   justify-content: center;
   color: var(--secondary-text);
+  padding: 20px;
 }
 
 .chats-panel__new-chat-icon {

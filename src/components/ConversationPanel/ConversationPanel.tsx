@@ -80,8 +80,8 @@ export default function ConversationPanel(props: IConversationPanelProps) {
             className="conversation-panel__messages"
             ref={messagesContainerRef}
           >
-            {props.chat.messages.map((message, i) => (
-              <Message user={props.user} message={message} key={i} />
+            {props.chat.messages.map((message) => (
+              <Message user={props.user} message={message} key={message.id} />
             ))}
           </div>
           <div className="conversation-panel__footer">

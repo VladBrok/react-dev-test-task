@@ -50,7 +50,7 @@ export default function ChatsPanel(props: IChatsPanelProps) {
                 name={getChatName(chat, props.user)}
                 isActive={i === props.activeChatIndex}
                 onClick={() => props.onChatClick(chat, i)}
-                key={i}
+                key={chat.id}
               />
             ))}
           </div>

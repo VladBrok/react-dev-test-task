@@ -3,12 +3,14 @@ export interface IUser {
 }
 
 export interface IMessage {
+  id: string;
   from: IUser;
   to: IUser;
   text: string;
 }
 
 export interface IChat {
+  id: string;
   users: IUser[];
   messages: IMessage[];
 }

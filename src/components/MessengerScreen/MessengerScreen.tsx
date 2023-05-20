@@ -1,6 +1,7 @@
 import "./MessengerScreen.css";
 import "../../sharedStyles.css";
 import { useCallback, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
@@ -42,6 +43,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
       );
 
       addMessage(activeChatIndex, {
+        id: uuidv4(),
         from: props.user,
         to: receiver!, // TODO: fix
         text: message,
@@ -71,6 +73,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     setChats((prev) => [
       ...prev,
       {
+        id: uuidv4(),
         messages: [],
         users: [
           {
