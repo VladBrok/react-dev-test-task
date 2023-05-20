@@ -1,0 +1,60 @@
+.conversation-panel__container {
+  flex-grow: 1;
+}
+
+.conversation-panel__no-selected-chat-view {
+  background-color: var(--primary);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-text);
+  font-size: 32px;
+}
+
+.conversation-panel__content {
+  height: 100%;
+  background-image: url("/images/chat-background.png");
+  background-color: var(--conversation-panel-background);
+  background-repeat: repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-panel__header {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+  border-bottom: 1px solid var(--border);
+  font-size: 18px;
+  color: var(--primary-text);
+  padding: 18px 0 18px 30px;
+}
+
+.conversation-panel__messages {
+  flex-grow: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+}
+
+.conversation-panel__footer {
+  min-height: 62px;
+  background-color: var(--primary);
+  border-top: 1px solid var(--border);
+  padding: 20px 0 20px 60px;
+  display: flex;
+  align-items: center;
+  color: var(--secondary-text);
+}
+
+.conversation-panel__send-message-button {
+  margin-left: 14px;
+  margin-right: 22px;
+  margin-top: 4px;
+}
+
+.conversation-panel__send-message-button_hidden {
+  visibility: hidden;
+}

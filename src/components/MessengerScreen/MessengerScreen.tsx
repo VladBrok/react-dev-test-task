@@ -1,12 +1,10 @@
 import "./MessengerScreen.css";
 import "../../sharedStyles.css";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IChat, IMessage } from "../../types";
 import { IMessengerScreenProps } from "./MessengerScreen.types";
 import { assert } from "../../lib/assert";
 import { sendMessage } from "../../infrastructure/messages/sendMessage/sendMessage";
-import SendMessageIcon from "../Icons/SendMessageIcon";
-import Message from "../Message/Message";
 import Chat from "../Chat/Chat";
 import { formatPhoneNumber } from "../../lib/formatPhoneNumber";
 import toast, { Toaster } from "react-hot-toast";
@@ -16,6 +14,7 @@ import {
 } from "../../lib/notifications";
 import NewChatIcon from "../Icons/NewChatIcon";
 import CreateChatForm from "../CreateChatForm/CreateChatForm";
+import ConversationPanel from "../ConversationPanel/ConversationPanel";
 
 export default function MessengerScreen(props: IMessengerScreenProps) {
   const [chats, setChats] = useState<IChat[]>([
@@ -388,12 +387,8 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     },
   ]);
   const [activeChatIndex, setActiveChatIndex] = useState<number | null>(null);
-  const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isCreateChatFormOpen, setIsCreateChatFormOpen] = useState(false);
-  const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
-  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
-  const prevScrollTop = useRef(0);
 
   const getChatName = (chat: IChat): string => {
     // TODO: dup with "handleSendMessageClick"
@@ -404,8 +399,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     );
   };
 
-  const handleSendMessageClick = async (): Promise<void> => {
-    assert(message != "");
+  const handleSendMessage = async (message: string): Promise<void> => {
     assert(activeChatIndex != null);
 
     if (activeChatIndex == null) {
@@ -432,35 +426,15 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
         to: receiver!,
         text: message,
       });
-
-      setMessage("");
     } catch (e) {
       console.error(e);
       toast.error("Failed to send a message. Please try again later");
     } finally {
       setIsSending(false);
-      assert(messageInputRef.current != null);
-      messageInputRef.current?.focus();
     }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSendMessageClick();
-    }
-  };
-
-  const isScrolledToBottom = (): boolean => {
-    if (!messagesContainerRef.current) {
-      return false;
-    }
-
-    return Math.abs(messagesContainerRef.current.scrollTop) <= 3;
   };
 
   const addMessage = useCallback((chatIdx: number, message: IMessage): void => {
-    prevScrollTop.current = messagesContainerRef.current?.scrollTop || 0;
     setChats((prev) =>
       prev.map((chat, i) =>
         i === chatIdx
@@ -490,40 +464,6 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     ]);
     setIsCreateChatFormOpen(false);
   };
-
-  useEffect(() => {
-    if (activeChatIndex === null) {
-      return;
-    }
-
-    assert(messageInputRef.current != null);
-
-    messageInputRef.current?.focus();
-    setMessage("");
-  }, [activeChatIndex, addMessage]);
-
-  useEffect(() => {
-    if (
-      !messagesContainerRef.current ||
-      activeChatIndex === null ||
-      !chats[activeChatIndex].messages.length
-    ) {
-      return;
-    }
-
-    if (
-      isScrolledToBottom() ||
-      chats[activeChatIndex].messages[0].from.phone === props.user.phone
-    ) {
-      messagesContainerRef.current.scrollTop = 0;
-    } else {
-      const offset =
-        (
-          messagesContainerRef.current.firstChild as HTMLElement
-        )?.getBoundingClientRect().height || 0;
-      messagesContainerRef.current.scrollTop = prevScrollTop.current - offset;
-    }
-  }, [activeChatIndex, chats, props.user.phone]);
 
   const handleIncomingMessage = useCallback(
     (message: IMessage): void => {
@@ -588,52 +528,17 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           </>
         )}
       </div>
-      <div className="messenger-screen__conversation-panel">
-        {activeChatIndex === null && (
-          <div className="messenger-screen__no-selected-chat-view">
-            <p className="messenger-screen__no-selected-chat-view-tiile">
-              WhatsApp + Green API
-            </p>
-          </div>
-        )}
-        {activeChatIndex !== null && (
-          <div className="messenger-screen__conversation-panel-content">
-            <div className="messenger-screen__conversation-panel-header">
-              {getChatName(chats[activeChatIndex])}
-            </div>
-            <div
-              className="messenger-screen__conversation-panel-messages"
-              ref={messagesContainerRef}
-            >
-              {chats[activeChatIndex].messages.map((message, i) => (
-                <Message user={props.user} message={message} key={i} />
-              ))}
-            </div>
-            <div className="messenger-screen__conversation-panel-footer">
-              {/* TODO: increase rows value dynamically as user types (?)*/}
-              <textarea
-                ref={messageInputRef}
-                className="input-field"
-                rows={1}
-                placeholder="Enter a message..."
-                value={message}
-                onKeyDown={handleKeyDown}
-                onChange={(e) => setMessage(e.target.value)}
-              ></textarea>
-
-              <button
-                className={`messenger-screen__send-message-button ${
-                  message ? "" : "messenger-screen__send-message-button_hidden"
-                }`}
-                disabled={isSending}
-                onClick={handleSendMessageClick}
-              >
-                <SendMessageIcon />
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+      <ConversationPanel
+        user={props.user}
+        onSendMessage={handleSendMessage}
+        isSending={isSending}
+        chat={activeChatIndex != null ? chats[activeChatIndex] : undefined}
+        name={
+          activeChatIndex != null
+            ? getChatName(chats[activeChatIndex])
+            : undefined
+        }
+      />
       <Toaster />
     </div>
   );
