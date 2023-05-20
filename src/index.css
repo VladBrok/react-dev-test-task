@@ -7,9 +7,13 @@
   --border: #d1d7db;
   --message-from-me-bg: #d9fdd3;
   --message-from-friend-bg: #fff;
+  --messenger-screen-bg: #fff;
   --conversation-panel-background: #efeae2;
   --shadow-rgb: 11, 20, 26;
   --error: #ff2e74;
+  --app-bg: #eae6df;
+  --app-bg-deeper: #d1d7db;
+  --app-bg-stripe: #00a682;
 }
 
 body {

@@ -1,0 +1,10 @@
+.app__container {
+  background: var(--app-bg);
+  height: 100vh;
+  background-image: linear-gradient(
+    180deg,
+    var(--app-bg-stripe) 15%,
+    var(--app-bg) 15%,
+    var(--app-bg-deeper)
+  );
+}
