@@ -2,13 +2,14 @@ import { deleteNotification } from "../infrastructure/notifications/deleteNotifi
 import { isIncomingTextMessage } from "../infrastructure/notifications/receiveNotification/isIncomingTextMessage";
 import { receiveNotification } from "../infrastructure/notifications/receiveNotification/receiveNotification";
 import { IReceiveNotificationResponse } from "../infrastructure/notifications/receiveNotification/receiveNotification.types";
-import { IAbortController, ICredentials, IMessage } from "../types";
+import { IAbortController, ICredentials, IMessage, IUser } from "../types";
 import { extractPhoneFromChatId } from "./extractPhoneFromChatId";
 
 const PAUSE_BETWEEN_REQUESTS_IN_MILLISECONDS = 5000;
 
 export function startReceivingNotifications(
   credentials: ICredentials,
+  user: IUser,
   onIncomingMessage: (message: IMessage) => void,
   onError: (e: unknown) => void
 ): IAbortController {
@@ -16,6 +17,7 @@ export function startReceivingNotifications(
 
   processNotifications(
     credentials,
+    user,
     onIncomingMessage,
     onError,
     abortController
@@ -32,6 +34,7 @@ export function stopReceivingNotifications(
 
 async function processNotifications(
   credentials: ICredentials,
+  user: IUser,
   onIncomingMessage: (message: IMessage) => void,
   onError: (e: unknown) => void,
   abortController: IAbortController
@@ -61,9 +64,7 @@ async function processNotifications(
           from: {
             phone: extractPhoneFromChatId(chatId),
           },
-          to: {
-            phone: "",
-          },
+          to: user,
           text:
             notification?.body?.messageData?.textMessageData?.textMessage || "",
         });
@@ -79,6 +80,7 @@ async function processNotifications(
     () =>
       processNotifications(
         credentials,
+        user,
         onIncomingMessage,
         onError,
         abortController

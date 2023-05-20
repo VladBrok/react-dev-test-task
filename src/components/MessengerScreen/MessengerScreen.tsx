@@ -76,9 +76,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           {
             phone,
           },
-          {
-            phone: "",
-          },
+          props.user,
         ],
       },
     ]);
@@ -106,6 +104,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
   useEffect(() => {
     const abortController = startReceivingNotifications(
       props.credentials,
+      props.user,
       handleIncomingMessage,
       (error: unknown) => {
         console.error(error);
@@ -114,7 +113,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
     );
 
     return () => stopReceivingNotifications(abortController);
-  }, [handleIncomingMessage, props.credentials]);
+  }, [handleIncomingMessage, props.credentials, props.user]);
 
   return (
     <div className="messenger-screen__container">
