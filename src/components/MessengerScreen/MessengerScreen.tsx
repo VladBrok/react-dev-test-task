@@ -33,6 +33,11 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
       const receiver = chats[activeChatIndex].users.find(
         (user) => user.phone !== props.user.phone
       );
+      assert(receiver != null);
+
+      if (!receiver) {
+        return;
+      }
 
       await sendMessage(
         {
@@ -45,7 +50,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
       addMessage(activeChatIndex, {
         id: uuidv4(),
         from: props.user,
-        to: receiver!, // TODO: fix
+        to: receiver,
         text: message,
       });
     } catch (e) {
