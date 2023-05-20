@@ -506,6 +506,7 @@ export default function MessengerScreen(props: IMessengerScreenProps) {
           <CreateChatForm
             onCancel={() => setIsCreateChatFormOpen(false)}
             onCreate={addChat}
+            chats={chats}
           />
         ) : (
           <>

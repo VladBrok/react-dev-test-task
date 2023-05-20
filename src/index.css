@@ -9,6 +9,7 @@
   --message-from-friend-bg: #fff;
   --conversation-panel-background: #efeae2;
   --shadow-rgb: 11, 20, 26;
+  --error: #ff2e74;
 }
 
 body {
