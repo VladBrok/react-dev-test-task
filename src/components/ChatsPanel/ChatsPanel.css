@@ -1,0 +1,48 @@
+.chats-panel__container {
+  flex: 0 0 45%;
+  min-width: 45%;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chats-panel__menu {
+  color: var(--secondary-text);
+  border-bottom: 1px solid var(--border);
+  height: 55px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: var(--primary);
+}
+
+.chats-panel__empty {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-text);
+  padding: 20px;
+}
+
+.chats-panel__new-chat-icon {
+  position: relative;
+  top: 5px;
+}
+
+@media screen and (min-width: 1024px) {
+  .chats-panel__container {
+    flex: 0 0 40%;
+    min-width: 40%;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .chats-panel__container {
+    flex: 0 0 30%;
+    min-width: 30%;
+  }
+}

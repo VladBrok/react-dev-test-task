@@ -1,0 +1,16 @@
+.input-field {
+  width: 100%;
+  padding: 15px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--secondary-text);
+  resize: none;
+}
+
+.button-regular {
+  background-color: var(--secondary);
+  color: var(--tertiary-text);
+  padding: 12px 20px;
+  border-radius: 50px;
+}

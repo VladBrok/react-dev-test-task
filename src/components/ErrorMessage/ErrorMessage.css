@@ -1,0 +1,4 @@
+.error-message__container {
+  color: var(--error);
+  margin-top: 5px;
+}

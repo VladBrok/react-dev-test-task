@@ -1,5 +1,44 @@
+:root {
+  --primary: #f0f2f5;
+  --secondary: #008069;
+  --primary-text: #111b21;
+  --secondary-text: #3b4a54;
+  --tertiary-text: #fff;
+  --border: #d1d7db;
+  --message-from-me-bg: #d9fdd3;
+  --message-from-friend-bg: #fff;
+  --messenger-screen-bg: #fff;
+  --conversation-panel-background: #efeae2;
+  --shadow-rgb: 11, 20, 26;
+  --error: #ff2e74;
+  --app-bg: #eae6df;
+  --app-bg-deeper: #d1d7db;
+  --app-bg-stripe: #00a682;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  border: none;
+  color: inherit;
+  background: none;
+  font-size: inherit;
+}
+
+button:not(:disabled):hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-wrap: anywhere;
 }

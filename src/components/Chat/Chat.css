@@ -1,0 +1,22 @@
+.chat__container {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--primary-text);
+  border-bottom: 1px solid var(--primary);
+}
+
+.chat__container:hover {
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.chat__container_active {
+  background-color: var(--primary);
+}
+
+.chat__name {
+  margin-left: 30px;
+}
