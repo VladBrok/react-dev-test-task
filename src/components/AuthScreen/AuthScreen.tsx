@@ -63,6 +63,7 @@ export default function AuthScreen(props: IAuthProps) {
           <input
             ref={idInstanceInputRef}
             className="input-field"
+            autoFocus
             type="password"
             placeholder="Enter an idInstance..."
             value={props.credentials.idInstance}
