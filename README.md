@@ -31,3 +31,51 @@
      WhatsApp
    - Получатель отвечает на сообщение в мессенджере WhatsApp
    - Пользователь видит ответ получателя в чате
+
+## Результат
+
+### Локальный запуск проекта
+
+Для локального запуска проекта необходимо:
+
+1. Склонировать репозиротий
+
+```sh
+git clone https://github.com/VladBrok/react-dev-test-task.git
+```
+
+2. Перейти в папку с репозиторием
+
+```sh
+cd react-dev-test-task
+```
+
+3. Установить зависимости
+
+```sh
+npm i
+```
+
+4. Запустить dev сервер
+
+```sh
+npm run dev
+```
+
+### Экранные формы
+
+1. Экран авторизации
+
+![auth screen demo](public/demo/auth-screen.png)
+
+2. Главный экран
+
+![main screen demo](public/demo/main-screen.png)
+
+3. Создание чата
+
+![chat creation screen demo](public/demo/chat-creation.png)
+
+4. Просмотр чатов и сообщений
+
+![chats and messages view demo](public/demo/chats-and-messages.png)
