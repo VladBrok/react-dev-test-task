@@ -38,9 +38,11 @@ export default function CreateChatForm(props: ICreateChatPanelProps) {
       setErrorMessage(validationResult.error.errors[0].message);
       assert(inputRef.current != null);
       inputRef.current?.focus();
-    } else {
-      props.onCreate(validationResult.data);
+      return;
     }
+
+    setErrorMessage("");
+    props.onCreate(validationResult.data);
   };
 
   return (
